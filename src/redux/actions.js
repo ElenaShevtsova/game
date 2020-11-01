@@ -1,4 +1,4 @@
-import calculateWinner from '../utils';
+import { calculateWinner } from '../utils';
 const ACTION_CHANGE_VALUE = 'ACTION_CHANGE_VALUE';
 const ACTION_CHANGE_STEP = 'ACTION_CHANGE_STEP';
 const ACTION_END_OF_GAME = 'ACTION_END_OF_GAME';
