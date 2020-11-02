@@ -7,15 +7,15 @@ import { jumpTo, handleClick } from '../../redux/actions';
 
 class Game extends React.Component {
     render() {
-        const history = this.props.history;
-        const current = history[this.props.stepNumber];
+        const { handleClick, history, jumpTo, stepNumber, xIsNext } = this.props;
+        const current = history[stepNumber];
         const winner = calculateWinner(current.squares);
         const moves = history.map((step, move) => {
             const desc = move ?
                 `Перейти к ходу # ${move}` : `К началу игры`
             return (
                 <li key={move}>
-                    <button onClick={() => this.props.jumpTo(move)}>{desc}</button>
+                    <button onClick={() => jumpTo(move)}>{desc}</button>
                 </li>
             )
         })
@@ -23,17 +23,17 @@ class Game extends React.Component {
         if (winner) {
             status = `Выиграл ${winner}`
         } else {
-            if (this.props.history.length === 10) {
+            if (history.length === 10) {
                 status = `Ничья`
             } else {
-                status = `Следующий ход: ${this.props.xIsNext ? 'X' : 'O'}`
+                status = `Следующий ход: ${xIsNext ? 'X' : 'O'}`
             }
         }
         return (
             <div className="game">
                 <div className="game-board">
                     <Board squares={current.squares} onClick={(i) => {
-                        this.props.handleClick(i, this.props);
+                        handleClick(i, this.props);
                     }} />
                 </div>
                 <div className="game-info">
@@ -53,12 +53,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatch = (dispatch) => {
     return {
         jumpTo: bindActionCreators(jumpTo, dispatch),
         handleClick: bindActionCreators(handleClick, dispatch),
     }
 }
 
-const WrappedGameComponent = connect(mapStateToProps, mapDispatchToProps)(Game);
-export { WrappedGameComponent };
+export const WrappedGameComponent = connect(mapStateToProps, mapDispatch)(Game);
