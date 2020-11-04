@@ -7,24 +7,25 @@ const initialState = {
 }
 
 export function rootReducer(state = initialState, action) {
+    const prop = action.payload;
     switch (action.type) {
         case 'ACTION_CHANGE_VALUE':
             return {
                 ...state,
-                history: action.payload.history,
-                xIsNext: action.payload.xIsNext,
-                stepNumber: action.payload.stepNumber,
+                history: prop.history,
+                xIsNext: prop.xIsNext,
+                stepNumber: prop.stepNumber,
             }
         case 'ACTION_CHANGE_STEP':
             return {
                 ...state,
-                stepNumber: action.payload.stepNumber,
-                xIsNext: action.payload.xIsNext
+                stepNumber: prop.stepNumber,
+                xIsNext: prop.xIsNext
             }
         case 'ACTION_END_OF_GAME':
             return {
                 ...state,
-                history: action.payload.history,
+                history: prop.history,
             }
         default: return state;    
     }

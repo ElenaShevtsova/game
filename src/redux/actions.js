@@ -13,26 +13,26 @@ export const jumpTo = (step) => {
     }
 }
 
-export const handleClick = (i, props) => {
-    const history = props.history.slice(0, props.stepNumber + 1);
+export const handleClick = (i, propsHistory, stepNumber, xIsNext) => {
+    const history = propsHistory.slice(0, stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     if (calculateWinner(squares) || squares[i]) {
         return {
             type: ACTION_END_OF_GAME,
             payload: {
-                history: props.history,
+                history: history,
             }
         }
     } else {
-        squares[i] = props.xIsNext ? 'X' : 'O';
+        squares[i] = xIsNext ? 'X' : 'O';
         return {
             type: ACTION_CHANGE_VALUE,
             payload: {
                 history: history.concat([{
                     squares: squares
                 }]),
-                xIsNext: !props.xIsNext,
+                xIsNext: !xIsNext,
                 stepNumber: history.length,
             }
         }

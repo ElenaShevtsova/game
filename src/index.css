@@ -49,3 +49,7 @@ body {
     margin-left: 20px;
   }
   
+  p {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
