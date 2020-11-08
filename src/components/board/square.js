@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { handleClick } from "../../redux/actions";
+import { clickOnSquare } from "../game";
 
 export function Square(prop) {
   const { index } = prop;
@@ -10,13 +10,12 @@ export function Square(prop) {
   const dispatch = useDispatch();
   const currentSquare = history[stepNumber].squares;
 
+  const click = () => {
+    dispatch(clickOnSquare(index, history, stepNumber, xIsNext));
+  };
+
   return (
-    <button
-      className={"square"}
-      onClick={() => {
-        dispatch(handleClick(index, history, stepNumber, xIsNext));
-      }}
-    >
+    <button className={"square"} onClick={click}>
       {currentSquare[index]}
     </button>
   );

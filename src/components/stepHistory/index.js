@@ -8,7 +8,7 @@ export function StepHistory() {
   return history.map((_, move) => {
     const desc = move ? `Перейти к ходу # ${move}` : "К началу игры";
     return (
-      <p key={move}>
+      <div key={move}>
         <button
           onClick={() => {
             dispatch(jumpTo(move));
@@ -16,7 +16,7 @@ export function StepHistory() {
         >
           {desc}
         </button>
-      </p>
+      </div>
     );
   });
 }

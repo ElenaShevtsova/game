@@ -1,5 +1,5 @@
 import React from "react";
-import { Square } from "../square";
+import { Square } from "./square";
 
 export function Board() {
   const squares = [
