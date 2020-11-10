@@ -1,6 +1,6 @@
 const ACTION_MAKE_A_MOVE = "ACTION_MAKE_A_MOVE";
 const ACTION_CHANGE_STEP = "ACTION_CHANGE_STEP";
-const ACTION_END_OF_GAME = "ACTION_END_OF_GAME";
+const ACTION_CHANGE_DISABLED = "ACTION_CHANGE_DISABLED";
 
 export const jumpTo = (step) => {
   return {
@@ -12,22 +12,20 @@ export const jumpTo = (step) => {
   };
 };
 
-export const actionMakeAMove = (history, xIsNext, squares) => {
+export const actionMakeAMove = (squares) => {
   return {
     type: ACTION_MAKE_A_MOVE,
     payload: {
-      squares: squares,
-      xIsNext: xIsNext,
-      stepNumber: history.length,
+      squares: squares
     },
   };
 };
 
-export const actionEndOfGame = (history) => {
+export const actionChangeDisabled = () => {
   return {
-    type: ACTION_END_OF_GAME,
+    type: ACTION_CHANGE_DISABLED,
     payload: {
-      history: history,
+      disabled: false,
     },
   };
 };

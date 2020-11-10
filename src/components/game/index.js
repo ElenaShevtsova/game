@@ -1,28 +1,23 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Board } from "../board";
-import { calculateWinner } from "../../utils";
 import { StepHistory } from "../stepHistory";
-import { actionMakeAMove, actionEndOfGame } from "../../redux/actions";
+import { actionMakeAMove, actionChangeDisabled } from "../../redux/actions";
 
-export const clickOnSquare = (i, propsHistory, stepNumber, xIsNext) => {
-  const history = propsHistory.slice(0, stepNumber + 1);
-  const current = history[history.length - 1];
-  const squares = current.squares.slice();
-  if (calculateWinner(squares) || squares[i]) {
-    return actionEndOfGame(history);
+export const clickOnSquare = (i, xIsNext, currentSquares) => {
+  const squares = currentSquares.slice();
+  if (squares[i]) {
+    return actionChangeDisabled();
   } else {
     squares[i] = xIsNext ? "X" : "O";
-    return actionMakeAMove(history, xIsNext, squares);
+    return actionMakeAMove(squares);
   }
 };
 
 export function Game() {
   const history = useSelector((state) => state.history);
-  const stepNumber = useSelector((state) => state.stepNumber);
   const xIsNext = useSelector((state) => state.xIsNext);
-  const current = history[stepNumber];
-  const winner = calculateWinner(current.squares);
+  const winner = useSelector((state) => state.winner);
   let status;
   if (winner) {
     status = `Выиграл ${winner}`;
