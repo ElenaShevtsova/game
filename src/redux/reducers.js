@@ -1,4 +1,4 @@
-import { calculateWinner } from "../utils";
+import { calculateWinner } from "../utils/calculateWinner";
 
 const initialState = {
   history: [

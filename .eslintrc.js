@@ -1,7 +1,11 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es2021": true
+        "es2021": true,
+        "commonjs": true,
+        "node": true,
+        "mocha": true,
+        "jest": true
     },
     "extends": [
         "eslint:recommended",
@@ -21,5 +25,5 @@ module.exports = {
     "rules": {
         "semi": ["error", "always"]
     },
-    "ignorePatterns": ['.eslintrc.js'],
+    "ignorePatterns": ['.eslintrc.js', 'babel.config.js'],
 };
