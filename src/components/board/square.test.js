@@ -20,10 +20,15 @@ const store = createStore(rootReducer, {
 });
 
 describe('Square Component', () => {
-
     it('has a tag button', () => {
         const squareComponent = mount(<Provider store={store}><Square/></Provider>);
         console.log(squareComponent.debug());
         expect(squareComponent.find('button').length).toEqual(1);
+    });
+
+    it('button has attribute disabled', ()=>{
+        const squareComponent = mount(<Provider store={store}><Square/></Provider>);
+        console.log(squareComponent.debug());
+        expect(squareComponent.find('button').props()).toHaveProperty('disabled');
     });
 });
