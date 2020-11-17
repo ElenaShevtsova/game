@@ -28,7 +28,6 @@ describe('Square Component', () => {
 
     it('button has attribute disabled', ()=>{
         const squareComponent = mount(<Provider store={store}><Square/></Provider>);
-        console.log(squareComponent.debug());
         expect(squareComponent.find('button').props()).toHaveProperty('disabled');
     });
 });
