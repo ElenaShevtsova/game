@@ -18,7 +18,7 @@ describe('Board Component', () => {
         expect(boardComponent.find('.game-board').children().length).toEqual(3);
     });
 
-    it('should has 9 Square Component', () => {
+    it('should render 9 Square Component', () => {
         const boardComponent = shallow(<Board/>);
         console.log(boardComponent.debug());
         expect(boardComponent.find(Square)).toHaveLength(9);

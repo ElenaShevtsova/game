@@ -3,31 +3,25 @@ import {Provider} from "react-redux";
 import {configure, mount} from 'enzyme';
 import {Square} from "./square";
 import {createStore} from "redux";
-import {rootReducer} from "../../redux/reducers";
+import {rootReducer, initialState} from "../../redux/reducers";
 import Adapter from 'enzyme-adapter-react-16';
 
 configure({adapter: new Adapter()});
-const store = createStore(rootReducer, {
-    history: [
-        {
-            squares: Array(9).fill(null),
-        },
-    ],
-    xIsNext: true,
-    stepNumber: 0,
-    winner: null,
-    disabled: false,
-});
+const store = createStore(rootReducer, initialState);
 
 describe('Square Component', () => {
-    it('has a tag button', () => {
-        const squareComponent = mount(<Provider store={store}><Square/></Provider>);
-        console.log(squareComponent.debug());
-        expect(squareComponent.find('button').length).toEqual(1);
+    const squareComponent = mount(<Provider store={store}><Square/></Provider>);
+
+    it('button has attribute disabled', () => {
+        expect(squareComponent.find('button').props()).toHaveProperty('disabled');
     });
 
-    it('button has attribute disabled', ()=>{
-        const squareComponent = mount(<Provider store={store}><Square/></Provider>);
-        expect(squareComponent.find('button').props()).toHaveProperty('disabled');
+    it('button has attribute disabled', () => {
+        const useDispatchSpy = jest.spyOn(jest.requireActual('react-redux'), 'useDispatch');
+        const mockDispatchFn = jest.fn();
+        useDispatchSpy.mockReturnValue(mockDispatchFn);
+        squareComponent.find('button').simulate('click');
+        expect(useDispatchSpy).toBeCalledTimes(1);
+
     });
 });
