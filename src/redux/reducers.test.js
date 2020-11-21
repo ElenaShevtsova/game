@@ -27,7 +27,7 @@ function historyAfterChangeStep() {
     ];
 }
 
-function historyAfterMakeAMove(){
+function historyAfterMakeAMove() {
     return [{
         squares:
             [null, null, null, null, null, null, null, null, null]
@@ -40,7 +40,7 @@ function historyAfterMakeAMove(){
     }, {
         squares:
             ['X', 'O', "X", null, null, null, null, null, null]
-    },{
+    }, {
         squares:
             ['X', 'O', "X", "O", null, null, null, null, null]
     }];
@@ -78,7 +78,7 @@ describe('game reducer', () => {
             stepNumber: 3,
             xIsNext: false,
             disabled: false,
-        },{
+        }, {
             type: 'ACTION_MAKE_A_MOVE',
             payload: {
                 squares: ['X', 'O', "X", "O", null, null, null, null, null]
@@ -89,6 +89,25 @@ describe('game reducer', () => {
             stepNumber: 4,
             disabled: false,
             winner: undefined,
+        });
+    });
+
+    it('should handle action ACTION_CHANGE_DISABLED', () => {
+        expect(rootReducer({
+            history: createInitialHistory(),
+            stepNumber: 3,
+            xIsNext: false,
+            disabled: false,
+        }, {
+            type: 'ACTION_CHANGE_DISABLED',
+            payload: {
+                disabled: false,
+            }
+        })).toEqual({
+            history: createInitialHistory(),
+            stepNumber: 3,
+            xIsNext: false,
+            disabled: false,
         });
     });
 });
