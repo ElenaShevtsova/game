@@ -1,13 +1,15 @@
 import {calculateWinner} from "./index";
 
-test('winner X', () => {
-    expect(calculateWinner(["X", "O", "O", null, "X", null, null, null, "X"])).toBe('X');
-});
+describe('testing function calculateWinner', () => {
+    it('player X wins', () => {
+        expect(calculateWinner(["X", "O", "O", null, "X", null, null, null, "X"])).toBe('X');
+    });
 
-test('winner O', () => {
-    expect(calculateWinner(["X", "X", "O", "X", "O", null, "O", null, null])).toBe('O');
-});
+    it('player O wins', () => {
+        expect(calculateWinner(["X", "X", "O", "X", "O", null, "O", null, null])).toBe('O');
+    });
 
-test('draw', () => {
-    expect(calculateWinner(["X", "O", "O", "O", "X", "X", "X", "X", "O"])).toBe(undefined);
+    it('no player won', () => {
+        expect(calculateWinner(["X", "O", "O", "O", "X", "X", "X", "X", "O"])).toBe(undefined);
+    });
 });

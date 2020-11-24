@@ -13,7 +13,6 @@ export function Square(prop) {
     const click = () => {
         dispatch(clickOnSquare(index, xIsNext, currentSquare));
     };
-
     return (
         <button className={"square"} onClick={click} disabled={disabled}>
             {currentSquare[index]}

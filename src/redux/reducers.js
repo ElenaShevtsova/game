@@ -1,6 +1,6 @@
 import { calculateWinner } from "../utils/calculateWinner";
 
-const initialState = {
+export const initialState = {
   history: [
     {
       squares: Array(9).fill(null),
@@ -18,7 +18,7 @@ export function rootReducer(state = initialState, action) {
   switch (action.type) {
     case "ACTION_MAKE_A_MOVE": {
       const winner = calculateWinner(payload.squares);
-      const disabled = winner ? true : false;
+      const disabled = !!winner;
       if (state.history.length !== payload.stepNumber) {
         newHistory = state.history.slice(0, payload.stepNumber + 1);
       }
