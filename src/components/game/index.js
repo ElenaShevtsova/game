@@ -10,7 +10,6 @@ export const clickOnSquare = (i, xIsNext, currentSquares) => {
     return actionChangeDisabled();
   } else {
     squares[i] = xIsNext ? "X" : "O";
-    console.log(squares);
     return actionMakeAMove(squares);
   }
 };
