@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { Board } from "../board";
 import { StepHistory } from "../stepHistory";
 import { actionMakeAMove, actionChangeDisabled } from "../../redux/actions";
+import {initState} from "../../redux/reducers";
 
-export const clickOnSquare = (i, xIsNext, currentSquares) => {
+export const clickOnSquare = (i:number, xIsNext:boolean, currentSquares:any) => {
   const squares = currentSquares.slice();
   if (squares[i]) {
     return actionChangeDisabled();
@@ -15,9 +16,9 @@ export const clickOnSquare = (i, xIsNext, currentSquares) => {
 };
 
 export function Game() {
-  const history = useSelector((state) => state.history);
-  const xIsNext = useSelector((state) => state.xIsNext);
-  const winner = useSelector((state) => state.winner);
+  const history = useSelector((state:initState) => state.history);
+  const xIsNext = useSelector((state:initState) => state.xIsNext);
+  const winner = useSelector((state:initState) => state.winner);
   let status;
   if (winner) {
     status = `Выиграл ${winner}`;

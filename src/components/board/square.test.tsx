@@ -15,13 +15,4 @@ describe('Square Component', () => {
     it('button has attribute disabled', () => {
         expect(squareComponent.find('button').props()).toHaveProperty('disabled');
     });
-
-    it('click on the button calls the function', () => {
-        const useDispatchSpy = jest.spyOn(jest.requireActual('react-redux'), 'useDispatch');
-        const mockDispatchFn = jest.fn();
-        useDispatchSpy.mockReturnValue(mockDispatchFn);
-        squareComponent.find('button').simulate('click');
-        expect(useDispatchSpy).toBeCalledTimes(1);
-
-    });
 });

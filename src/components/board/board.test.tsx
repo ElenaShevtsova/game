@@ -14,13 +14,11 @@ describe('Board Component', () => {
 
     it('div with className game-board has 3 row', () => {
         const boardComponent = shallow(<Board/>);
-        console.log(boardComponent.debug());
         expect(boardComponent.find('.game-board').children().length).toEqual(3);
     });
 
     it('should render 9 Square Component', () => {
         const boardComponent = shallow(<Board/>);
-        console.log(boardComponent.debug());
         expect(boardComponent.find(Square)).toHaveLength(9);
     });
 });
