@@ -1,14 +1,15 @@
 import {calculateWinner} from "../utils/calculateWinner";
+import {actionTypes} from "./actions";
 
 export interface initState {
-    history: any,
+    history: {squares:string[]}[],
     xIsNext: boolean,
     stepNumber: number,
     winner: null | undefined,
     disabled: boolean
 }
 
-export const initialState = {
+export const initialState: initState = {
     history: [
         {
             squares: Array(9).fill(null),
@@ -20,17 +21,16 @@ export const initialState = {
     disabled: false,
 };
 
-export function rootReducer(state: initState = initialState, action: any) {
-    const payload = action.payload;
+export function rootReducer(state = initialState, action: actionTypes) {
     let newHistory;
     switch (action.type) {
         case "ACTION_MAKE_A_MOVE": {
-            const winner = calculateWinner(payload.squares);
+            const winner = calculateWinner(action.payload.squares);
             const disabled = !!winner;
-            if (state.history.length !== payload.stepNumber) {
-                newHistory = state.history.slice(0, payload.stepNumber + 1);
+            if (state.history.length !== state.stepNumber) {
+                newHistory = state.history.slice(0, state.stepNumber + 1);
             }
-            newHistory = state.history.concat({squares: payload.squares});
+            newHistory = state.history.concat({squares: action.payload.squares});
             return {
                 ...state,
                 history: newHistory,
@@ -43,16 +43,16 @@ export function rootReducer(state: initState = initialState, action: any) {
         case "ACTION_CHANGE_STEP":
             return {
                 ...state,
-                history: state.history.slice(0, payload.stepNumber + 1),
-                stepNumber: payload.stepNumber,
-                xIsNext: payload.xIsNext,
+                history: state.history.slice(0, action.payload.stepNumber + 1),
+                stepNumber: action.payload.stepNumber,
+                xIsNext: action.payload.xIsNext,
                 disabled: false,
                 winner: state.winner
             };
         case "ACTION_CHANGE_DISABLED":
             return {
                 ...state,
-                disabled: payload.disabled,
+                disabled: action.payload.disabled,
             };
         default:
             return state;
