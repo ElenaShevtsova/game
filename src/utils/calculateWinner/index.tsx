@@ -10,7 +10,7 @@ export function calculateWinner(squares: (string | null)[]): null | undefined {
         [2, 4, 6],
     ];
     let result;
-    lines.forEach((i: number[]) => {
+    lines.forEach((i) => {
         const [a, b, c] = i;
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
             result = squares[a];

@@ -10,10 +10,10 @@ export function Board() {
 
     return (
         <div className={"game-board"}>
-            {squares.map((row: number[]) => {
+            {squares.map((row) => {
                 return (
                     <div className={"board-row"} key={`Row ${row}`}>
-                        {row.map((i: number) => {
+                        {row.map((i) => {
                             return <Square index={i} key={`Index ${i}`}/>;
                         })}
                     </div>
