@@ -1,13 +1,13 @@
 import React, {FC} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {clickOnSquare} from "../game";
+import {clickOnSquare, SquaresInHistory} from "../game";
 import {initState} from "../../redux/reducers";
 
 export type SquareProps = {index: number};
 
 export const Square: FC<SquareProps> = (prop) => {
     const {index} = prop;
-    const history = useSelector<initState, {squares:string[]}[]>((state) => state.history);
+    const history = useSelector<initState, SquaresInHistory>((state) => state.history);
     const stepNumber = useSelector<initState, number>((state) => state.stepNumber);
     const xIsNext = useSelector<initState, boolean>((state) => state.xIsNext);
     const disabled = useSelector<initState, boolean>((state) => state.disabled);

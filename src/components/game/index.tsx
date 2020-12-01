@@ -5,6 +5,9 @@ import {StepHistory} from "../stepHistory";
 import {actionMakeAMove, actionChangeDisabled} from "../../redux/actions";
 import {initState} from "../../redux/reducers";
 
+export type SquaresInHistory = {squares:string[]}[];
+export type Winner =  null | undefined;
+
 export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: string[]) => {
     const squares = currentSquares.slice();
     if (squares[i]) {
@@ -16,9 +19,9 @@ export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: strin
 };
 
 export function Game(){
-    const history = useSelector<initState, {squares:string[]}[]>((state) => state.history);
+    const history = useSelector<initState, SquaresInHistory>((state) => state.history);
     const xIsNext = useSelector<initState,boolean>((state) => state.xIsNext);
-    const winner = useSelector<initState, null | undefined>((state) => state.winner);
+    const winner = useSelector<initState, Winner>((state) => state.winner);
     let status;
     if (winner) {
         status = `Выиграл ${winner}`;

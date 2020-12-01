@@ -18,4 +18,3 @@ export function calculateWinner(squares: (string | null)[]): null | undefined {
     });
     return result;
 }
-
