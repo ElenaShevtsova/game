@@ -2,7 +2,7 @@ export const ACTION_MAKE_A_MOVE = "ACTION_MAKE_A_MOVE";
 export const ACTION_CHANGE_STEP = "ACTION_CHANGE_STEP";
 export const ACTION_CHANGE_DISABLED = "ACTION_CHANGE_DISABLED";
 
-export interface jumpToStep {
+export interface IJumpToStepAction {
     type: typeof ACTION_CHANGE_STEP,
     payload: {
         stepNumber: number,
@@ -10,23 +10,23 @@ export interface jumpToStep {
     }
 }
 
-export interface makeAMove {
+export interface IMakeAMoveAction {
     type: typeof ACTION_MAKE_A_MOVE,
     payload: {
         squares: string[]
     }
 }
 
-export interface changeDisabled {
+export interface IChangeDisabledAction {
     type: typeof ACTION_CHANGE_DISABLED,
     payload: {
         disabled: boolean
     }
 }
 
-export type actionTypes = jumpToStep | makeAMove | changeDisabled;
+export type actionTypes = IJumpToStepAction | IMakeAMoveAction | IChangeDisabledAction;
 
-export const jumpTo = (step: number):jumpToStep => {
+export const jumpTo = (step: number):IJumpToStepAction => {
     return {
         type: ACTION_CHANGE_STEP,
         payload: {
@@ -36,7 +36,7 @@ export const jumpTo = (step: number):jumpToStep => {
     };
 };
 
-export const actionMakeAMove = (squares: string[]):makeAMove => {
+export const actionMakeAMove = (squares: string[]):IMakeAMoveAction => {
     return {
         type: ACTION_MAKE_A_MOVE,
         payload: {
@@ -45,7 +45,7 @@ export const actionMakeAMove = (squares: string[]):makeAMove => {
     };
 };
 
-export const actionChangeDisabled = ():changeDisabled => {
+export const actionChangeDisabled = ():IChangeDisabledAction => {
     return {
         type: ACTION_CHANGE_DISABLED,
         payload: {

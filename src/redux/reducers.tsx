@@ -1,15 +1,16 @@
 import {calculateWinner} from "../utils/calculateWinner";
-import {actionTypes} from "./actions";
+import {ACTION_CHANGE_DISABLED, ACTION_CHANGE_STEP, ACTION_MAKE_A_MOVE, actionTypes} from "./actions";
+import {Winner} from "../components/game";
 
-export interface initState {
+export interface IInitState {
     history: {squares:string[]}[],
     xIsNext: boolean,
     stepNumber: number,
-    winner: null | undefined,
+    winner: Winner,
     disabled: boolean
 }
 
-export const initialState: initState = {
+export const initialState: IInitState = {
     history: [
         {
             squares: Array(9).fill(null),
@@ -17,14 +18,14 @@ export const initialState: initState = {
     ],
     xIsNext: true,
     stepNumber: 0,
-    winner: null,
+    winner: undefined,
     disabled: false,
 };
 
 export function rootReducer(state = initialState, action: actionTypes) {
     let newHistory;
     switch (action.type) {
-        case "ACTION_MAKE_A_MOVE": {
+        case ACTION_MAKE_A_MOVE : {
             const winner = calculateWinner(action.payload.squares);
             const disabled = !!winner;
             if (state.history.length !== state.stepNumber) {
@@ -36,11 +37,11 @@ export function rootReducer(state = initialState, action: actionTypes) {
                 history: newHistory,
                 xIsNext: !state.xIsNext,
                 stepNumber: state.history.length,
-                winner: winner,
-                disabled: disabled,
+                winner,
+                disabled,
             };
         }
-        case "ACTION_CHANGE_STEP":
+        case ACTION_CHANGE_STEP:
             return {
                 ...state,
                 history: state.history.slice(0, action.payload.stepNumber + 1),
@@ -49,7 +50,7 @@ export function rootReducer(state = initialState, action: actionTypes) {
                 disabled: false,
                 winner: state.winner
             };
-        case "ACTION_CHANGE_DISABLED":
+        case ACTION_CHANGE_DISABLED:
             return {
                 ...state,
                 disabled: action.payload.disabled,

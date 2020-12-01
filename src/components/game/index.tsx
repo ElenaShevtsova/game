@@ -2,13 +2,13 @@ import React from "react";
 import {useSelector} from "react-redux";
 import {Board} from "../board";
 import {StepHistory} from "../stepHistory";
-import {actionMakeAMove, actionChangeDisabled} from "../../redux/actions";
-import {initState} from "../../redux/reducers";
+import {actionMakeAMove, actionChangeDisabled, actionTypes} from "../../redux/actions";
+import {IInitState} from "../../redux/reducers";
 
 export type SquaresInHistory = {squares:string[]}[];
-export type Winner =  null | undefined;
+export type Winner =  string | undefined;
 
-export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: string[]) => {
+export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: string[]):actionTypes => {
     const squares = currentSquares.slice();
     if (squares[i]) {
         return actionChangeDisabled();
@@ -19,10 +19,10 @@ export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: strin
 };
 
 export function Game(){
-    const history = useSelector<initState, SquaresInHistory>((state) => state.history);
-    const xIsNext = useSelector<initState,boolean>((state) => state.xIsNext);
-    const winner = useSelector<initState, Winner>((state) => state.winner);
-    let status;
+    const history = useSelector<IInitState, SquaresInHistory>((state) => state.history);
+    const xIsNext = useSelector<IInitState,boolean>((state) => state.xIsNext);
+    const winner = useSelector<IInitState, Winner>((state) => state.winner);
+    let status:string;
     if (winner) {
         status = `Выиграл ${winner}`;
     } else {

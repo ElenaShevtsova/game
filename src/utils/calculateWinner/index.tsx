@@ -1,4 +1,6 @@
-export function calculateWinner(squares: (string | null)[]): null | undefined {
+import {Winner} from "../../components/game";
+
+export function calculateWinner(squares: (string | null)[]): Winner {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
