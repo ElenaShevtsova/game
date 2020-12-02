@@ -1,4 +1,4 @@
-import {Winner} from "../../components/game";
+import {Winner} from "../../types";
 
 export function calculateWinner(squares: (string | null)[]): Winner {
     const lines = [

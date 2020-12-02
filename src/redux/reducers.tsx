@@ -1,6 +1,6 @@
 import {calculateWinner} from "../utils/calculateWinner";
 import {ACTION_CHANGE_DISABLED, ACTION_CHANGE_STEP, ACTION_MAKE_A_MOVE, actionTypes} from "./actions";
-import {Winner} from "../components/game";
+import {Winner} from "../types";
 
 export interface IInitState {
     history: {squares:string[]}[],

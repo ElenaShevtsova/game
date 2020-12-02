@@ -4,9 +4,9 @@ import {Board} from "../board";
 import {StepHistory} from "../stepHistory";
 import {actionMakeAMove, actionChangeDisabled, actionTypes} from "../../redux/actions";
 import {IInitState} from "../../redux/reducers";
+import {Winner} from "../../types";
 
 export type SquaresInHistory = {squares:string[]}[];
-export type Winner =  string | null;
 
 export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: string[]):actionTypes => {
     const squares = currentSquares.slice();
