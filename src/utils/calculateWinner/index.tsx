@@ -11,11 +11,11 @@ export function calculateWinner(squares: (string | null)[]): Winner {
         [0, 4, 8],
         [2, 4, 6],
     ];
-    let result;
+    let result = null;
     lines.forEach((i) => {
         const [a, b, c] = i;
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            result = squares[a];
+           result = squares[a];
         }
     });
     return result;

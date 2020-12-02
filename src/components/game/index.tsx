@@ -6,7 +6,7 @@ import {actionMakeAMove, actionChangeDisabled, actionTypes} from "../../redux/ac
 import {IInitState} from "../../redux/reducers";
 
 export type SquaresInHistory = {squares:string[]}[];
-export type Winner =  string | undefined;
+export type Winner =  string | null;
 
 export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: string[]):actionTypes => {
     const squares = currentSquares.slice();

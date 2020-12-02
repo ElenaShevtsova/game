@@ -18,7 +18,7 @@ export const initialState: IInitState = {
     ],
     xIsNext: true,
     stepNumber: 0,
-    winner: undefined,
+    winner: null,
     disabled: false,
 };
 
