@@ -1,6 +1,6 @@
 import {Winner} from "../../types";
 
-export function calculateWinner(squares: (string | null)[]): Winner {
+export const calculateWinner = (squares: (string | null)[]): Winner => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -19,4 +19,4 @@ export function calculateWinner(squares: (string | null)[]): Winner {
         }
     });
     return result;
-}
+};

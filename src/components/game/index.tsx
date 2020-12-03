@@ -4,11 +4,10 @@ import {Board} from "../board";
 import {StepHistory} from "../stepHistory";
 import {actionMakeAMove, actionChangeDisabled, actionTypes} from "../../redux/actions";
 import {IInitState} from "../../redux/reducers";
-import {Winner} from "../../types";
+import {Winner, XIsNext, SquaresInHistory, Squares, Index} from "../../types";
 
-export type SquaresInHistory = {squares:string[]}[];
 
-export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: string[]):actionTypes => {
+export const clickOnSquare = (i: Index, xIsNext: XIsNext, currentSquares: Squares):actionTypes => {
     const squares = currentSquares.slice();
     if (squares[i]) {
         return actionChangeDisabled();
@@ -18,9 +17,9 @@ export const clickOnSquare = (i: number, xIsNext: boolean, currentSquares: strin
     }
 };
 
-export function Game(){
+export const Game = () => {
     const history = useSelector<IInitState, SquaresInHistory>((state) => state.history);
-    const xIsNext = useSelector<IInitState,boolean>((state) => state.xIsNext);
+    const xIsNext = useSelector<IInitState, XIsNext>((state) => state.xIsNext);
     const winner = useSelector<IInitState, Winner>((state) => state.winner);
     let status:string;
     if (winner) {

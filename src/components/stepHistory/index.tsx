@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { jumpTo } from "../../redux/actions";
 import {IInitState} from "../../redux/reducers";
-import {SquaresInHistory} from "../game";
+import {SquaresInHistory} from "../../types";
 
 export function StepHistory() {
   const history = useSelector<IInitState,SquaresInHistory>((state) => state.history);

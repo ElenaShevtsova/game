@@ -1,13 +1,13 @@
 import {calculateWinner} from "../utils/calculateWinner";
 import {ACTION_CHANGE_DISABLED, ACTION_CHANGE_STEP, ACTION_MAKE_A_MOVE, actionTypes} from "./actions";
-import {Winner} from "../types";
+import {Disabled, SquaresInHistory, StepNumber, Winner, XIsNext} from "../types";
 
 export interface IInitState {
-    history: {squares:string[]}[],
-    xIsNext: boolean,
-    stepNumber: number,
+    history: SquaresInHistory,
+    xIsNext: XIsNext,
+    stepNumber: StepNumber,
     winner: Winner,
-    disabled: boolean
+    disabled: Disabled,
 }
 
 export const initialState: IInitState = {
