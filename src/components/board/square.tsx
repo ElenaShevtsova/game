@@ -13,7 +13,6 @@ export const Square: FC<SquareProps> = (prop) => {
     const xIsNext = useSelector<IInitState, XIsNext>((state) => state.xIsNext);
     const disabled = useSelector<IInitState, Disabled>((state) => state.disabled);
     const dispatch = useDispatch();
-    console.log(history[stepNumber]);
     const currentSquare = history[stepNumber].squares;
     const click = () => {
         dispatch(clickOnSquare(index, xIsNext, currentSquare));
