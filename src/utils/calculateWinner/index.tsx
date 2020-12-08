@@ -1,4 +1,6 @@
-export function calculateWinner(squares) {
+import {Winner} from "../../types";
+
+export const calculateWinner = (squares: (string | null)[]): Winner => {
     const lines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -9,13 +11,12 @@ export function calculateWinner(squares) {
         [0, 4, 8],
         [2, 4, 6],
     ];
-    let result;
+    let result = null;
     lines.forEach((i) => {
         const [a, b, c] = i;
         if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-            result = squares[a];
+           result = squares[a];
         }
     });
     return result;
-}
-
+};

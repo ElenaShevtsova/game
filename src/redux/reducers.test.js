@@ -1,7 +1,6 @@
 import {rootReducer, initialState} from "./reducers";
 
-function createInitialHistory() {
-    return [{
+const createInitialHistory = [{
         squares:
             [null, null, null, null, null, null, null, null, null]
     }, {
@@ -14,10 +13,8 @@ function createInitialHistory() {
         squares:
             ['X', 'O', "X", null, null, null, null, null, null]
     }];
-}
 
-function historyAfterChangeStep() {
-    return [{
+const historyAfterChangeStep = [{
         squares:
             [null, null, null, null, null, null, null, null, null]
     }, {
@@ -25,10 +22,8 @@ function historyAfterChangeStep() {
             ['X', null, null, null, null, null, null, null, null]
     }
     ];
-}
 
-function historyAfterMakeAMove() {
-    return [{
+const historyAfterMakeAMove = [{
         squares:
             [null, null, null, null, null, null, null, null, null]
     }, {
@@ -44,7 +39,6 @@ function historyAfterMakeAMove() {
         squares:
             ['X', 'O', "X", "O", null, null, null, null, null]
     }];
-}
 
 describe('game reducer', () => {
 
@@ -54,7 +48,7 @@ describe('game reducer', () => {
 
     it('should handle action ACTION_CHANGE_STEP', () => {
         expect(rootReducer({
-                history: createInitialHistory(),
+                history: createInitialHistory,
                 stepNumber: 3,
                 xIsNext: false,
                 disabled: false,
@@ -65,7 +59,7 @@ describe('game reducer', () => {
                 }
             }
         )).toEqual({
-            history: historyAfterChangeStep(),
+            history: historyAfterChangeStep,
             xIsNext: false,
             stepNumber: 1,
             disabled: false,
@@ -74,7 +68,7 @@ describe('game reducer', () => {
 
     it('should handle action ACTION_MAKE_A_MOVE', () => {
         expect(rootReducer({
-            history: createInitialHistory(),
+            history: createInitialHistory,
             stepNumber: 3,
             xIsNext: false,
             disabled: false,
@@ -84,7 +78,7 @@ describe('game reducer', () => {
                 squares: ['X', 'O', "X", "O", null, null, null, null, null]
             }
         })).toEqual({
-            history: historyAfterMakeAMove(),
+            history: historyAfterMakeAMove,
             xIsNext: true,
             stepNumber: 4,
             disabled: false,
@@ -94,7 +88,7 @@ describe('game reducer', () => {
 
     it('should handle action ACTION_CHANGE_DISABLED', () => {
         expect(rootReducer({
-            history: createInitialHistory(),
+            history: createInitialHistory,
             stepNumber: 3,
             xIsNext: false,
             disabled: false,
@@ -104,7 +98,7 @@ describe('game reducer', () => {
                 disabled: false,
             }
         })).toEqual({
-            history: createInitialHistory(),
+            history: createInitialHistory,
             stepNumber: 3,
             xIsNext: false,
             disabled: false,
