@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {jumpTo} from '../../redux/actions';
 import {IInitState} from '../../redux/reducers';
 import {SquaresInHistory} from '../../types';
-import {View, TouchableHighlight, StyleSheet, Text} from 'react-native';
+import {TouchableHighlight, StyleSheet, Text, ScrollView} from 'react-native';
 import {blackColor} from '../board/square';
 
 export function StepHistory() {
@@ -16,7 +16,7 @@ export function StepHistory() {
       {history.map((_, move) => {
         const desc = move ? `Перейти к ходу # ${move}` : 'К началу игры';
         return (
-          <View key={move}>
+          <ScrollView key={move}>
             <TouchableHighlight
               style={styles.button}
               onPress={() => {
@@ -24,7 +24,7 @@ export function StepHistory() {
               }}>
               <Text style={styles.textColorBlue}>{desc}</Text>
             </TouchableHighlight>
-          </View>
+          </ScrollView>
         );
       })}
     </>
