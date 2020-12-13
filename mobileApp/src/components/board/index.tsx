@@ -1,8 +1,10 @@
 import React from 'react';
-import {Square} from './square';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
 
-export function Board() {
+import {Square} from './square';
+import {styles} from './Board.styles';
+
+export const Board = () => {
   const squares = [
     [0, 1, 2],
     [3, 4, 5],
@@ -22,11 +24,4 @@ export function Board() {
       })}
     </View>
   );
-}
-
-const styles = StyleSheet.create({
-  square: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-});
+};

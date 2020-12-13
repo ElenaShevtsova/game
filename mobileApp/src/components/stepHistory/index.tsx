@@ -1,15 +1,15 @@
 import React from 'react';
+import {TouchableHighlight, Text, ScrollView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
+
 import {jumpTo} from '../../redux/actions';
 import {IInitState} from '../../redux/reducers';
 import {SquaresInHistory} from '../../types';
-import {TouchableHighlight, StyleSheet, Text, ScrollView} from 'react-native';
-import {blackColor} from '../board/square';
+import {styles} from './StepHistory.styles';
+import {selectorHistory} from '../../redux/selectors';
 
 export function StepHistory() {
-  const history = useSelector<IInitState, SquaresInHistory>(
-    (state) => state.history,
-  );
+  const history = useSelector<IInitState, SquaresInHistory>(selectorHistory);
   const dispatch = useDispatch();
   return (
     <>
@@ -30,21 +30,3 @@ export function StepHistory() {
     </>
   );
 }
-
-const blueColor = '#207ee8';
-const styles = StyleSheet.create({
-  button: {
-    borderWidth: 1,
-    borderColor: blackColor,
-    borderStyle: 'solid',
-    width: 170,
-    textAlign: 'center',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  textColorBlue: {
-    color: blueColor,
-    fontSize: 16,
-    textAlign: 'center',
-  },
-});
