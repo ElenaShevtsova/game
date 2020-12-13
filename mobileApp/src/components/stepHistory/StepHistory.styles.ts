@@ -1,7 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 import {blackColor, blueColor} from '../../constants';
+interface Style {
+  button: ViewStyle;
+  textColorBlue: ViewStyle;
+}
 
-export const styles = StyleSheet.create({
+export const styles = StyleSheet.create<Style>({
   button: {
     borderWidth: 1,
     borderColor: blackColor,

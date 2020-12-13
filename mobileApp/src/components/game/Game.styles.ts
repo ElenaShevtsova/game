@@ -1,6 +1,12 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, ViewStyle} from 'react-native';
 
-export const styles = StyleSheet.create({
+interface Style {
+  game: ViewStyle;
+  gameInfo: ViewStyle;
+  styleStatus: ViewStyle;
+}
+
+export const styles = StyleSheet.create<Style>({
   game: {
     display: 'flex',
     marginTop: 100,

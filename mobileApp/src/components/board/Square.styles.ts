@@ -1,8 +1,13 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
 import {whiteColor, blackColor} from '../../constants';
 
-export const styles = StyleSheet.create({
+interface Style {
+  field: ViewStyle;
+  fontSize: TextStyle;
+}
+
+export const styles = StyleSheet.create<Style>({
   field: {
     backgroundColor: whiteColor,
     borderWidth: 1,
