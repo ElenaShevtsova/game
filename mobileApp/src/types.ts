@@ -6,3 +6,5 @@ export type SquaresInHistory = {squares: string[]}[];
 export type Squares = string[];
 export type Step = number;
 export type Index = number;
+export type Status = string;
+export type CurrentSquare = string[];

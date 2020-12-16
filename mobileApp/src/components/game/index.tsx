@@ -1,22 +1,25 @@
-import React from 'react';
-import {View, Text, ScrollView} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import {Board} from '../board';
-import {StepHistory} from '../stepHistory';
 import {
   actionMakeAMove,
   actionChangeDisabled,
   actionTypes,
 } from '../../redux/actions';
 import {IInitState} from '../../redux/reducers';
-import {Winner, XIsNext, SquaresInHistory, Squares, Index} from '../../types';
-import {styles} from './Game.styles';
+import {
+  XIsNext,
+  Squares,
+  Index,
+  Status,
+  SquaresInHistory,
+  Winner,
+} from '../../types';
 import {
   selectorHistory,
   selectorWinner,
   selectorXIsNext,
 } from '../../redux/selectors';
+import {GameComponent} from './game';
 
 export const clickOnSquare = (
   i: Index,
@@ -36,7 +39,7 @@ export const Game = () => {
   const history = useSelector<IInitState, SquaresInHistory>(selectorHistory);
   const xIsNext = useSelector<IInitState, XIsNext>(selectorXIsNext);
   const winner = useSelector<IInitState, Winner>(selectorWinner);
-  let status: string;
+  let status: Status;
   if (winner) {
     status = `Выиграл ${winner}`;
   } else {
@@ -46,15 +49,5 @@ export const Game = () => {
       status = `Следующий ход: ${xIsNext ? 'X' : 'O'}`;
     }
   }
-  return (
-    <View style={styles.game}>
-      <Board />
-      <ScrollView style={styles.gameInfo}>
-        <View>
-          <Text style={styles.styleStatus}>{status}</Text>
-        </View>
-        <StepHistory />
-      </ScrollView>
-    </View>
-  );
+  return GameComponent({status});
 };
