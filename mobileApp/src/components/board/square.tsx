@@ -26,7 +26,6 @@ export const Square: FC<SquareProps> = (prop) => {
   const stepNumber = useSelector<IInitState, StepNumber>(selectorStepNumber);
   const xIsNext = useSelector<IInitState, XIsNext>(selectorXIsNext);
   const disabled = useSelector<IInitState, Disabled>(selectorDisabled);
-  //const dispatch = useDispatch();
   const currentSquare = history[stepNumber].squares;
   const click = clickOnSquare(index, xIsNext, currentSquare);
   return SquareViewComponent({disabled, click, currentSquare, index});
