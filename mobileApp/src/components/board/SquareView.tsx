@@ -1,4 +1,4 @@
-import {Text, TouchableHighlight, View} from 'react-native';
+import {Text, TouchableHighlight} from 'react-native';
 import {styles} from './Square.styles';
 import React, {FC} from 'react';
 import {Disabled, Index, CurrentSquare} from '../../types';
@@ -15,13 +15,11 @@ export const SquareViewComponent: FC<SquareViewComponentProps> = (props) => {
   const {disabled, click, currentSquare, index} = props;
   const dispatch = useDispatch();
   return (
-    <View>
-      <TouchableHighlight
-        onPress={() => dispatch(click)}
-        disabled={disabled}
-        style={styles.field}>
-        <Text style={styles.fontSize}>{currentSquare[index]}</Text>
-      </TouchableHighlight>
-    </View>
+    <TouchableHighlight
+      onPress={() => dispatch(click)}
+      disabled={disabled}
+      style={styles.field}>
+      <Text style={styles.fontSize}>{currentSquare[index]}</Text>
+    </TouchableHighlight>
   );
 };

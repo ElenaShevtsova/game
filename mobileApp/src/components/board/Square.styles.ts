@@ -1,26 +1,32 @@
 import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
-import {whiteColor, blackColor} from '../../constants';
+import {WHITE_COLOR, BLACK_COLOR, BORDER_WIDTH} from '../../constants';
 
 interface Style {
   field: ViewStyle;
   fontSize: TextStyle;
 }
 
+const HEIGHT = 74;
+const WIDTH = 74;
+const LINE_HEIGHT = 74;
+const FONTSIZE = 54;
+const PADDING_LEFT = 15;
+
 export const styles = StyleSheet.create<Style>({
   field: {
-    backgroundColor: whiteColor,
-    borderWidth: 1,
-    borderColor: blackColor,
+    backgroundColor: WHITE_COLOR,
+    borderWidth: BORDER_WIDTH,
+    borderColor: BLACK_COLOR,
     borderStyle: 'solid',
     fontWeight: 'bold',
-    lineHeight: 74,
-    height: 74,
+    lineHeight: LINE_HEIGHT,
+    height: HEIGHT,
     textAlign: 'center',
-    width: 74,
-    paddingLeft: 15,
+    width: WIDTH,
+    paddingLeft: PADDING_LEFT,
   },
   fontSize: {
-    fontSize: 54,
+    fontSize: FONTSIZE,
   },
 });

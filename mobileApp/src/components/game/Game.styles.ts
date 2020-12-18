@@ -6,21 +6,29 @@ interface Style {
   styleStatus: ViewStyle;
 }
 
+const MARGIN_TOP = 100;
+const WIDTH = 180;
+const PADDING_TOP = 30;
+const FONTSIZE = 13;
+const PADDING_LEFT = 30;
+const PADDING_BOTTOM = 15;
+
+
 export const styles = StyleSheet.create<Style>({
   game: {
     display: 'flex',
-    marginTop: 100,
+    marginTop: MARGIN_TOP,
     justifyContent: 'center',
     alignItems: 'center',
   },
   gameInfo: {
-    width: 180,
-    paddingTop: 30,
+    width: WIDTH,
+    paddingTop: PADDING_TOP,
   },
   styleStatus: {
-    fontSize: 13,
+    fontSize: FONTSIZE,
     fontWeight: 'bold',
-    paddingLeft: 30,
-    paddingBottom: 15,
+    paddingLeft: PADDING_LEFT,
+    paddingBottom: PADDING_BOTTOM,
   },
 });
