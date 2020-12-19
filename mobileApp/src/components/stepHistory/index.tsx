@@ -3,13 +3,11 @@ import {TouchableHighlight, Text, ScrollView} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 
 import {jumpTo} from '../../redux/actions';
-import {IInitState} from '../../redux/reducers';
-import {SquaresInHistory} from '../../types';
 import {styles} from './StepHistory.styles';
-import {selectorHistory} from '../../redux/selectors';
+import {historySelector} from '../../redux/selectors';
 
 export function StepHistory() {
-  const history = useSelector<IInitState, SquaresInHistory>(selectorHistory);
+  const history = useSelector(historySelector);
   const dispatch = useDispatch();
   return (
     <>

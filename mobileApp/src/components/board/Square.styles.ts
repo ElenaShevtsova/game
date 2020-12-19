@@ -7,9 +7,7 @@ interface Style {
   fontSize: TextStyle;
 }
 
-const HEIGHT = 74;
-const WIDTH = 74;
-const LINE_HEIGHT = 74;
+const SIZE = 74;
 const FONTSIZE = 54;
 const PADDING_LEFT = 15;
 
@@ -20,10 +18,10 @@ export const styles = StyleSheet.create<Style>({
     borderColor: BLACK_COLOR,
     borderStyle: 'solid',
     fontWeight: 'bold',
-    lineHeight: LINE_HEIGHT,
-    height: HEIGHT,
+    lineHeight: SIZE,
+    height: SIZE,
     textAlign: 'center',
-    width: WIDTH,
+    width: SIZE,
     paddingLeft: PADDING_LEFT,
   },
   fontSize: {

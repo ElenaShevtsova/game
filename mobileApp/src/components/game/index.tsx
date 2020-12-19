@@ -5,19 +5,11 @@ import {
   actionChangeDisabled,
   actionTypes,
 } from '../../redux/actions';
-import {IInitState} from '../../redux/reducers';
+import {XIsNext, Squares, Index, Status} from '../../types';
 import {
-  XIsNext,
-  Squares,
-  Index,
-  Status,
-  SquaresInHistory,
-  Winner,
-} from '../../types';
-import {
-  selectorHistory,
-  selectorWinner,
-  selectorXIsNext,
+  historySelector,
+  winnerSelector,
+  xIsNextSelector,
 } from '../../redux/selectors';
 import {GameComponent} from './game';
 
@@ -36,9 +28,9 @@ export const clickOnSquare = (
 };
 
 export const Game = () => {
-  const history = useSelector<IInitState, SquaresInHistory>(selectorHistory);
-  const xIsNext = useSelector<IInitState, XIsNext>(selectorXIsNext);
-  const winner = useSelector<IInitState, Winner>(selectorWinner);
+  const history = useSelector(historySelector);
+  const xIsNext = useSelector(xIsNextSelector);
+  const winner = useSelector(winnerSelector);
   let status: Status;
   if (winner) {
     status = `Выиграл ${winner}`;

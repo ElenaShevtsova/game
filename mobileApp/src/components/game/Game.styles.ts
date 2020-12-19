@@ -6,13 +6,11 @@ interface Style {
   styleStatus: ViewStyle;
 }
 
+const SIZE = 30;
 const MARGIN_TOP = 100;
 const WIDTH = 180;
-const PADDING_TOP = 30;
 const FONTSIZE = 13;
-const PADDING_LEFT = 30;
 const PADDING_BOTTOM = 15;
-
 
 export const styles = StyleSheet.create<Style>({
   game: {
@@ -23,12 +21,12 @@ export const styles = StyleSheet.create<Style>({
   },
   gameInfo: {
     width: WIDTH,
-    paddingTop: PADDING_TOP,
+    paddingTop: SIZE,
   },
   styleStatus: {
     fontSize: FONTSIZE,
     fontWeight: 'bold',
-    paddingLeft: PADDING_LEFT,
+    paddingLeft: SIZE,
     paddingBottom: PADDING_BOTTOM,
   },
 });
