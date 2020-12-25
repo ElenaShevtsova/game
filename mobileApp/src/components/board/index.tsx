@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import {Square} from './square';
 import {styles} from './Board.styles';
 
-export const Board = () => {
+export const Board = (props) => {
   const squares = [
     [0, 1, 2],
     [3, 4, 5],
@@ -17,7 +17,7 @@ export const Board = () => {
         return (
           <View key={`Row ${row}`}>
             {row.map((i) => {
-              return <Square index={i} key={`Index ${i}`} />;
+              return <Square current={props.current} makeTransition={props.makeTransition} index={i} key={`Index ${i}`} />;
             })}
           </View>
         );

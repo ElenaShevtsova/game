@@ -12,6 +12,9 @@ import {
   xIsNextSelector,
 } from '../../redux/selectors';
 import {GameComponent} from './game';
+import { useMachine } from '@xstate/react';
+import { gameMachine } from '../../Machine/main';
+import { useEffect } from 'react';
 
 export const clickOnSquare = (
   i: Index,
@@ -28,18 +31,12 @@ export const clickOnSquare = (
 };
 
 export const Game = () => {
-  const history = useSelector(historySelector);
-  const xIsNext = useSelector(xIsNextSelector);
-  const winner = useSelector(winnerSelector);
-  let status: Status;
-  if (winner) {
-    status = `Выиграл ${winner}`;
-  } else {
-    if (history.length === 10) {
-      status = 'Ничья';
-    } else {
-      status = `Следующий ход: ${xIsNext ? 'X' : 'O'}`;
-    }
+  // const history = useSelector(historySelector);
+  const [current, send] = useMachine(gameMachine);
+
+  const makeTransition = () => {
+    send('TRANSITION');
   }
-  return GameComponent({status});
+
+  return GameComponent({status: 'Ничья', makeTransition, current});
 };

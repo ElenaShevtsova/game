@@ -4,6 +4,8 @@ import React, {FC} from 'react';
 import {Disabled, Index, CurrentSquare} from '../../types';
 import {actionTypes} from '../../redux/actions';
 import {useDispatch} from 'react-redux';
+import { useMachine } from '@xstate/react';
+import { gameMachine } from '../../Machine/main';
 
 export type SquareViewComponentProps = {
   disabled: Disabled;
@@ -12,11 +14,13 @@ export type SquareViewComponentProps = {
   index: Index;
 };
 export const SquareViewComponent: FC<SquareViewComponentProps> = (props) => {
-  const {disabled, click, currentSquare, index} = props;
-  const dispatch = useDispatch();
+  const {disabled, currentSquare, index, onClick} = props;
+
   return (
     <TouchableHighlight
-      onPress={() => dispatch(click)}
+      onPress={() => {
+        onClick()
+      }}
       disabled={disabled}
       style={styles.field}>
       <Text style={styles.fontSize}>{currentSquare[index]}</Text>

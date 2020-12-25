@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {clickOnSquare} from '../game';
 import {CurrentSquare, Index} from '../../types';
@@ -10,15 +10,22 @@ import {
   xIsNextSelector,
 } from '../../redux/selectors';
 import {SquareViewComponent} from './SquareView';
+import { useMachine } from '@xstate/react';
+import { gameMachine } from '../../Machine/main';
 
 export type SquareProps = {index: Index};
 export const Square: FC<SquareProps> = (prop) => {
-  const {index} = prop;
+  const dispatch = useDispatch();
+  const {index, makeTransition, current} = prop;
   const history = useSelector(historySelector);
-  const xIsNext = useSelector(xIsNextSelector);
   const stepNumber = useSelector(stepNumberSelector);
   const disabled = useSelector(disabledSelector);
   const currentSquare: CurrentSquare = history[stepNumber].squares;
-  const click = clickOnSquare(index, xIsNext, currentSquare);
-  return SquareViewComponent({disabled, click, currentSquare, index});
+
+  const onClick = () => {
+    makeTransition()
+    dispatch(clickOnSquare(index, current.value === 'xTurn', currentSquare));
+  }
+
+  return SquareViewComponent({disabled, currentSquare, index, onClick});
 };

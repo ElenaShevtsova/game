@@ -5,10 +5,14 @@ import {useSelector, useDispatch} from 'react-redux';
 import {jumpTo} from '../../redux/actions';
 import {styles} from './StepHistory.styles';
 import {historySelector} from '../../redux/selectors';
+import { useMachine } from '@xstate/react';
+import { gameMachine } from '../../Machine/main';
 
-export function StepHistory() {
+export function StepHistory(props) {
   const history = useSelector(historySelector);
   const dispatch = useDispatch();
+
+  // const [current, send] = useMachine(gameMachine);
   return (
     <>
       {history.map((_, move) => {
@@ -18,7 +22,9 @@ export function StepHistory() {
             <TouchableHighlight
               style={styles.button}
               onPress={() => {
-                dispatch(jumpTo(move));
+                if (!move) {
+                  props.makeTransition();
+                }
               }}>
               <Text style={styles.textColorBlue}>{desc}</Text>
             </TouchableHighlight>

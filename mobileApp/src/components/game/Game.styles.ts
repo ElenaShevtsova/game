@@ -4,6 +4,7 @@ interface Style {
   game: ViewStyle;
   gameInfo: ViewStyle;
   styleStatus: ViewStyle;
+  gameContainerStyle: ViewStyle;
 }
 
 const SIZE = 30;
@@ -16,6 +17,8 @@ export const styles = StyleSheet.create<Style>({
   game: {
     display: 'flex',
     marginTop: MARGIN_TOP,
+  },
+  gameContainerStyle: {
     justifyContent: 'center',
     alignItems: 'center',
   },
