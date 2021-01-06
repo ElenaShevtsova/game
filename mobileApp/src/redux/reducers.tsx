@@ -6,6 +6,7 @@ import {
   actionTypes,
 } from './actions';
 import {
+  CurrentSquare,
   Disabled,
   SquaresInHistory,
   StepNumber,
@@ -36,7 +37,7 @@ export const initialState: IInitState = {
 export function rootReducer(state = initialState, action: actionTypes) {
   let newHistory;
   switch (action.type) {
-    case ACTION_MAKE_A_MOVE: {
+    case ACTION_MAKE_A_MOVE:
       const winner = calculateWinner(action.payload.squares);
       const disabled = !!winner;
       if (state.history.length !== state.stepNumber) {
@@ -51,7 +52,6 @@ export function rootReducer(state = initialState, action: actionTypes) {
         winner,
         disabled,
       };
-    }
     case ACTION_CHANGE_STEP:
       return {
         ...state,

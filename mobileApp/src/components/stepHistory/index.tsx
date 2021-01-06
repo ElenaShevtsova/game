@@ -1,24 +1,24 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {TouchableHighlight, Text, ScrollView} from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
 
-import {jumpTo} from '../../redux/actions';
 import {styles} from './StepHistory.styles';
-import {historySelector} from '../../redux/selectors';
+import {Move} from "../../types";
 
-export function StepHistory() {
-  const history = useSelector(historySelector);
-  const dispatch = useDispatch();
+type StepHistoryProps = { current: any, jumpToMove: any };
+
+export const StepHistory:FC<StepHistoryProps> = (props) => {
+  const {current, jumpToMove} = props;
+  const history = current.context.history;
   return (
     <>
-      {history.map((_, move) => {
+      {history.map((_:any, move: Move) => {
         const desc = move ? `Перейти к ходу # ${move}` : 'К началу игры';
         return (
           <ScrollView key={move}>
             <TouchableHighlight
               style={styles.button}
               onPress={() => {
-                dispatch(jumpTo(move));
+                jumpToMove(move);
               }}>
               <Text style={styles.textColorBlue}>{desc}</Text>
             </TouchableHighlight>

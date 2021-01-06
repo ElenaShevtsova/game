@@ -5,18 +5,18 @@ import {StepHistory} from '../stepHistory';
 import React, {FC} from 'react';
 import {Status} from '../../types';
 
-export type GameComponentProps = {status: Status};
+export type GameComponentProps = { status: Status, saveCurrentSquare: any, current: any, jumpToMove: any};
 export const GameComponent: FC<GameComponentProps> = (props) => {
-  const {status} = props;
-  return (
-    <ScrollView style={styles.game}>
-      <Board />
-      <ScrollView style={styles.gameInfo}>
-        <View>
-          <Text style={styles.styleStatus}>{status}</Text>
+    const {status, saveCurrentSquare, current, jumpToMove} = props;
+    return (
+        <View style={styles.game}>
+            <Board saveCurrentSquare={saveCurrentSquare} current={current}/>
+            <ScrollView style={styles.gameInfo}>
+                <View>
+                    <Text style={styles.styleStatus}>{status}</Text>
+                </View>
+                <StepHistory current={current} jumpToMove={jumpToMove}/>
+            </ScrollView>
         </View>
-        <StepHistory />
-      </ScrollView>
-    </ScrollView>
-  );
+    );
 };

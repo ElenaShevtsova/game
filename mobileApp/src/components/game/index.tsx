@@ -1,36 +1,35 @@
-import {useSelector} from 'react-redux';
+import {useMachine} from '@xstate/react';
 
-import {
-  actionMakeAMove,
-  actionChangeDisabled,
-  actionTypes,
-} from '../../redux/actions';
-import {XIsNext, Squares, Index, Status} from '../../types';
-import {
-  historySelector,
-  winnerSelector,
-  xIsNextSelector,
-} from '../../redux/selectors';
+import {XIsNext, Squares, Index, Status, Step} from '../../types';
 import {GameComponent} from './game';
+import {gameMachine} from "../../machines/gameMachine/gameMachine";
 
 export const clickOnSquare = (
   i: Index,
   xIsNext: XIsNext,
   currentSquares: Squares,
-): actionTypes => {
+  saveCurrentSquare: any
+) => {
   const squares = currentSquares.slice();
-  if (squares[i]) {
-    return actionChangeDisabled();
-  } else {
+  if(!squares[i]) {
     squares[i] = xIsNext ? 'X' : 'O';
-    return actionMakeAMove(squares);
+    saveCurrentSquare(squares);
   }
 };
 
 export const Game = () => {
-  const history = useSelector(historySelector);
-  const xIsNext = useSelector(xIsNextSelector);
-  const winner = useSelector(winnerSelector);
+  const [current, send] = useMachine(gameMachine);
+  const history = current.context.history;
+  const xIsNext = current.context.xIsNext;
+  const winner = current.context.winner;
+
+  const saveCurrentSquare = (currentSquare: any) => {
+    send('TRANSITION', {currentSquare});
+  }
+  const jumpToMove = (step: Step) => {
+    send('CHANGE_STEP', {step});
+  };
+
   let status: Status;
   if (winner) {
     status = `Выиграл ${winner}`;
@@ -41,5 +40,6 @@ export const Game = () => {
       status = `Следующий ход: ${xIsNext ? 'X' : 'O'}`;
     }
   }
-  return GameComponent({status});
+
+  return GameComponent({status, saveCurrentSquare, current, jumpToMove});
 };

@@ -8,3 +8,4 @@ export type Step = number;
 export type Index = number;
 export type Status = string;
 export type CurrentSquare = string[];
+export type Move = number;
