@@ -3,9 +3,9 @@ import {styles} from './Game.styles';
 import {Board} from '../board';
 import {StepHistory} from '../stepHistory';
 import React, {FC} from 'react';
-import {Current, Status} from '../../types';
+import {Squares, State, Status, Step} from '../../types';
 
-export type GameComponentProps = { status: Status, saveCurrentSquare: any, state: Current, jumpToMove: any };
+export type GameComponentProps = { status: Status, saveCurrentSquare(currentSquare: Squares): void, state: State, jumpToMove(step: Step): void };
 export const GameComponent: FC<GameComponentProps> = (props) => {
     const {status, saveCurrentSquare, state, jumpToMove} = props;
     return (

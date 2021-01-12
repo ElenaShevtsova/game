@@ -2,16 +2,16 @@ import React, {FC} from 'react';
 import {TouchableHighlight, Text, ScrollView} from 'react-native';
 
 import {styles} from './StepHistory.styles';
-import {Current, Move} from '../../types';
+import {Move, Square, State, Step} from '../../types';
 
-type StepHistoryProps = { state: Current, jumpToMove: any };
+type StepHistoryProps = { state: State, jumpToMove(step: Step): void };
 
 export const StepHistory: FC<StepHistoryProps> = (props) => {
     const {state, jumpToMove} = props;
     const history = state.context.history;
     return (
         <>
-            {history.map((_: any, move: Move) => {
+            {history.map((_: Square, move: Move) => {
                 const desc = move ? `Перейти к ходу # ${move}` : 'К началу игры';
                 return (
                     <ScrollView key={move}>

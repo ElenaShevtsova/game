@@ -3,8 +3,9 @@ import {View} from 'react-native';
 
 import {Square} from './square';
 import {styles} from './Board.styles';
+import {Squares, State} from '../../types';
 
-type BoardComponentProps = { saveCurrentSquare: any, state: any };
+type BoardComponentProps = { saveCurrentSquare(currentSquare: Squares): void, state: State };
 export const Board: FC<BoardComponentProps> = (props) => {
     const {saveCurrentSquare, state} = props;
     const squares = [

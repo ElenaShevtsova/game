@@ -8,7 +8,7 @@ export const clickOnSquare = (
     i: Index,
     xIsNext: XIsNext,
     currentSquares: Squares,
-    saveCurrentSquare: any
+    saveCurrentSquare: (currentSquare: Squares) => void
 ) => {
     const squares = currentSquares.slice();
     if (!squares[i]) {
@@ -26,7 +26,7 @@ export const Game = () => {
     const saveCurrentSquare = (currentSquare: Squares) => {
         send({type: 'MAKE_A_MOVE', currentSquare: currentSquare, xIsNext: !xIsNext});
     }
-    const jumpToMove = (step: Step) => {
+    const jumpToMove = (step: Step)=> {
         send({type: 'CHANGE_STEP', step: step});
     };
 

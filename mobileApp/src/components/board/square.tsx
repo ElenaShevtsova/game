@@ -1,10 +1,10 @@
 import {FC} from 'react';
 
 import {clickOnSquare} from '../game';
-import {CurrentSquare, Index} from '../../types';
+import {CurrentSquare, Index, Squares, State} from '../../types';
 import {SquareViewComponent} from './SquareView';
 
-export type SquareProps = { index: Index, saveCurrentSquare: any, state: any };
+export type SquareProps = { index: Index, saveCurrentSquare(currentSquare: Squares): void, state: State };
 export const Square: FC<SquareProps> = (prop) => {
     const {index, saveCurrentSquare, state} = prop;
     const history = state.context.history;
