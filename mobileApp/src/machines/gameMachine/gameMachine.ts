@@ -1,9 +1,17 @@
-import {assign, Machine} from "xstate";
+import {assign, interpret, Machine} from 'xstate';
 
-import {IInitState} from "../../redux/reducers";
-import {calculateWinner} from "../../utils/calculateWinner";
+import {calculateWinner} from '../../utils/calculateWinner';
+import {Disabled, SquaresInHistory, StepNumber, Winner, XIsNext} from '../../types';
 
-const initialState: IInitState = {
+interface IInitContext {
+    history: SquaresInHistory;
+    xIsNext: XIsNext;
+    stepNumber: StepNumber;
+    winner: Winner;
+    disabled: Disabled;
+}
+
+export const initialContext: IInitContext = {
     history: [
         {
             squares: Array(9).fill(null),
@@ -23,90 +31,69 @@ interface GameMachineStateSchema {
     },
 }
 
-export const gameMachine = Machine<IInitState, GameMachineStateSchema>({
+export const gameMachine = Machine<IInitContext, GameMachineStateSchema>({
         id: 'gameMachine',
         initial: 'idle',
-        context: initialState,
+        context: initialContext,
         states: {
             idle: {
                 on: {
-                    TRANSITION: {
+                    MAKE_A_MOVE: {
                         target: 'xTurn',
-                        actions:
-                            assign((context, event, payload) => {
-                                const square = payload._event.data.currentSquare;
-                                const winner = calculateWinner(square);
-                                return {
-                                    history: context.history.concat({squares: square}),
-                                    stepNumber: context.stepNumber + 1,
-                                    xIsNext: false,
-                                    winner,
-                                }
-                            })
+                        actions: 'makeAMove'
                     }
                 },
             },
             xTurn: {
                 on: {
-                    TRANSITION: {
+                    MAKE_A_MOVE: {
                         target: 'oTurn',
-                        actions: assign((context, event, payload) => {
-                            const square = payload._event.data.currentSquare;
-                            const winner = calculateWinner(square);
-                            const disabled = !!winner;
-                            return {
-                                history: context.history.concat({squares: square}),
-                                stepNumber: context.stepNumber + 1,
-                                xIsNext: true,
-                                winner,
-                                disabled
-                            }
-                        })
+                        actions: 'makeAMove'
                     },
                     CHANGE_STEP: {
-                        actions: assign((context, event, payload) => {
-                            const step = payload._event.data.step;
-                            return {
-                                history: context.history.slice(0, step + 1),
-                                stepNumber: step,
-                                xIsNext: step % 2 === 0,
-                                disabled: false,
-                            }
-                        })
+                        actions: 'changeStep'
                     }
                 },
             },
             oTurn: {
                 on: {
-                    TRANSITION: {
+                    MAKE_A_MOVE: {
                         target: 'xTurn',
-                        actions:
-                            assign((context, event, payload) => {
-                                const square = payload._event.data.currentSquare;
-                                const winner = calculateWinner(square);
-                                const disabled = !!winner;
-                                return {
-                                    history: context.history.concat({squares: square}),
-                                    stepNumber: context.stepNumber + 1,
-                                    xIsNext: false,
-                                    winner,
-                                    disabled
-                                }
-                            })
+                        actions: 'makeAMove'
                     },
                     CHANGE_STEP: {
-                        actions: assign((context, event, payload) => {
-                            const step = payload._event.data.step;
-                            return {
-                                history: context.history.slice(0, step + 1),
-                                stepNumber: step,
-                                xIsNext: step % 2 === 0,
-                                disabled: false,
-                            }
-                        })
+                        actions: 'changeStep'
                     }
                 }
             }
         },
     },
+    {
+        actions: {
+            makeAMove: assign((context, event, payload) => {
+                const square = payload._event.data.currentSquare;
+                const winner = calculateWinner(square);
+                const xIsNext = payload._event.data.xIsNext;
+                const disabled = !!winner;
+                return {
+                    history: context.history.concat({squares: square}),
+                    stepNumber: context.stepNumber + 1,
+                    xIsNext: xIsNext,
+                    winner,
+                    disabled
+                }
+            }),
+            changeStep: assign((context, event, payload) => {
+                const step = payload._event.data.step;
+                return {
+                    history: context.history.slice(0, step + 1),
+                    stepNumber: step,
+                    xIsNext: step % 2 === 0,
+                    disabled: false,
+                }
+            })
+        }
+    }
 );
+
+export const service = interpret(gameMachine).start();

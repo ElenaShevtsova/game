@@ -4,16 +4,16 @@ import {clickOnSquare} from '../game';
 import {CurrentSquare, Index} from '../../types';
 import {SquareViewComponent} from './SquareView';
 
-export type SquareProps = { index: Index, saveCurrentSquare: any, current: any};
+export type SquareProps = { index: Index, saveCurrentSquare: any, state: any };
 export const Square: FC<SquareProps> = (prop) => {
-    const {index, saveCurrentSquare, current} = prop;
-    const history = current.context.history;
-    const xIsNext = current.context.xIsNext;
-    const stepNumber = current.context.stepNumber;
-    const disabled = current.context.disabled;
+    const {index, saveCurrentSquare, state} = prop;
+    const history = state.context.history;
+    const xIsNext = state.context.xIsNext;
+    const stepNumber = state.context.stepNumber;
+    const disabled = state.context.disabled;
     const currentSquare: CurrentSquare = history[stepNumber].squares;
     const onClick = () => {
-       clickOnSquare(index, xIsNext, currentSquare, saveCurrentSquare);
+        clickOnSquare(index, xIsNext, currentSquare, saveCurrentSquare);
     }
     return SquareViewComponent({disabled, currentSquare, index, onClick});
 };
