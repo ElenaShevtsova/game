@@ -9,7 +9,7 @@ export type GameComponentProps = {status: Status};
 export const GameComponent: FC<GameComponentProps> = (props) => {
   const {status} = props;
   return (
-    <ScrollView style={styles.game}>
+    <View style={styles.game}>
       <Board />
       <ScrollView style={styles.gameInfo}>
         <View>
@@ -17,6 +17,6 @@ export const GameComponent: FC<GameComponentProps> = (props) => {
         </View>
         <StepHistory />
       </ScrollView>
-    </ScrollView>
+    </View>
   );
 };

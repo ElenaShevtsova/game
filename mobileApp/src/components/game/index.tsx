@@ -4,13 +4,13 @@ import {
   actionMakeAMove,
   actionChangeDisabled,
   actionTypes,
-} from '../../redux/actions';
+} from '../../redux/actions/actions';
 import {XIsNext, Squares, Index, Status} from '../../types';
 import {
   historySelector,
   winnerSelector,
   xIsNextSelector,
-} from '../../redux/selectors';
+} from '../../redux/selectors/selectors';
 import {GameComponent} from './game';
 
 export const clickOnSquare = (

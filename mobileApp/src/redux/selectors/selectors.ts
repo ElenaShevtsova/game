@@ -1,4 +1,4 @@
-import {IInitState} from './reducers';
+import {IInitState} from '../reducers/reducers';
 
 export const historySelector = (state: IInitState) => state.history;
 export const xIsNextSelector = (state: IInitState) => state.xIsNext;

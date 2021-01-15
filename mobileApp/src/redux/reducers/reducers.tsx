@@ -1,17 +1,17 @@
-import {calculateWinner} from '../utils/calculateWinner';
+import {calculateWinner} from '../../utils/calculateWinner';
 import {
   ACTION_CHANGE_DISABLED,
   ACTION_CHANGE_STEP,
-  ACTION_MAKE_A_MOVE,
-  actionTypes,
-} from './actions';
+  ACTION_MAKE_A_MOVE
+} from '../constants/constants';
+import {actionTypes} from '../actions/actions';
 import {
   Disabled,
   SquaresInHistory,
   StepNumber,
   Winner,
   XIsNext,
-} from '../types';
+} from '../../types';
 
 export interface IInitState {
   history: SquaresInHistory;

@@ -8,5 +8,6 @@ export const styles = StyleSheet.create<Style>({
   square: {
     display: 'flex',
     flexDirection: 'row',
+    width: 230,
   },
 });
