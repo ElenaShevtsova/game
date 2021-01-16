@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {calculateWinner} from '../../utils/calculateWinner';
 import {
   ACTION_CHANGE_DISABLED,
@@ -34,6 +36,7 @@ export const initialState: IInitState = {
 };
 
 export function rootReducer(state = initialState, action: actionTypes) {
+  const cloneState = _.cloneDeep(state);
   let newHistory;
   switch (action.type) {
     case ACTION_MAKE_A_MOVE: {
@@ -44,7 +47,7 @@ export function rootReducer(state = initialState, action: actionTypes) {
       }
       newHistory = state.history.concat({squares: action.payload.squares});
       return {
-        ...state,
+        cloneState,
         history: newHistory,
         xIsNext: !state.xIsNext,
         stepNumber: state.history.length,
@@ -54,7 +57,7 @@ export function rootReducer(state = initialState, action: actionTypes) {
     }
     case ACTION_CHANGE_STEP:
       return {
-        ...state,
+        cloneState,
         history: state.history.slice(0, action.payload.stepNumber + 1),
         stepNumber: action.payload.stepNumber,
         xIsNext: action.payload.xIsNext,
@@ -63,7 +66,7 @@ export function rootReducer(state = initialState, action: actionTypes) {
       };
     case ACTION_CHANGE_DISABLED:
       return {
-        ...state,
+        cloneState,
         disabled: action.payload.disabled,
       };
     default:
