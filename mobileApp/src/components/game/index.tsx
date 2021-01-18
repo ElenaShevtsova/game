@@ -1,8 +1,9 @@
 import {useService} from '@xstate/react';
 
-import {XIsNext, Squares, Index, Status, Step} from '../../types';
+import {Index, Squares, Status, Step, XIsNext} from '../../types';
 import {GameComponent} from './game';
 import {service} from '../../machines/gameMachine/gameMachine';
+import {GAMES_EVENTS} from "../../machines/gameMachine/eventTypes";
 
 export const clickOnSquare = (
     i: Index,
@@ -24,10 +25,10 @@ export const Game = () => {
     const winner = state.context.winner;
 
     const saveCurrentSquare = (currentSquare: Squares) => {
-        send({type: 'MAKE_A_MOVE', currentSquare: currentSquare, xIsNext: !xIsNext});
+        send({type: GAMES_EVENTS.MAKE_A_MOVE, payload: {currentSquare: currentSquare, xIsNext: !xIsNext}});
     }
-    const jumpToMove = (step: Step)=> {
-        send({type: 'CHANGE_STEP', step: step});
+    const jumpToMove = (step: Step) => {
+        send({type: GAMES_EVENTS.CHANGE_STEP, payload: {step: step}});
     };
 
     let status: Status;
