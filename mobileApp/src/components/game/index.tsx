@@ -3,7 +3,7 @@ import {useService} from '@xstate/react';
 import {Index, Squares, Status, Step, XIsNext} from '../../types';
 import {GameComponent} from './game';
 import {service} from '../../machines/gameMachine/gameMachine';
-import {GAMES_EVENTS} from "../../machines/gameMachine/eventTypes";
+import {GAMES_EVENTS} from '../../machines/gameMachine/eventTypes';
 
 export const clickOnSquare = (
     i: Index,

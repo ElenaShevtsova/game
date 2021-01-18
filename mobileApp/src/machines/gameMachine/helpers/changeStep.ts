@@ -1,6 +1,6 @@
 import {assign} from 'xstate';
 import {IInitContext} from '../gameMachine';
-import {ChangeStep} from "../eventTypes";
+import {ChangeStep} from '../eventTypes';
 
 export const changeStep = () => {
     return assign((context:IInitContext, event: ChangeStep) => {

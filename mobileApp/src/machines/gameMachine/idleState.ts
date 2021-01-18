@@ -1,8 +1,8 @@
 import {MachineConfig} from 'xstate';
 import {GAME_TYPES, GameStates} from './stateTypes';
 import {makeAMove} from './helpers/makeAMove';
-import {IInitContext} from "./gameMachine";
-import {GameEvents, GAMES_EVENTS} from "./eventTypes";
+import {IInitContext} from './gameMachine';
+import {GameEvents, GAMES_EVENTS} from './eventTypes';
 
 export const idleState = () => {
     const idleStateConfig: MachineConfig<IInitContext, GameStates, GameEvents> = {

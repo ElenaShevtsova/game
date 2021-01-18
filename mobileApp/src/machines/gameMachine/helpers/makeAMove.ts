@@ -1,7 +1,7 @@
 import {assign} from 'xstate';
 import {calculateWinner} from '../../../utils/calculateWinner';
 import {IInitContext} from '../gameMachine';
-import {MakeAMove} from "../eventTypes";
+import {MakeAMove} from '../eventTypes';
 
 export const makeAMove = () => {
     return assign((context: IInitContext, event: MakeAMove ) => {
