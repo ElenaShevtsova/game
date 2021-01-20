@@ -30,7 +30,7 @@ export const Game = () => {
     const jumpToMove = (step: Step) => {
         send({type: GAMES_EVENTS.CHANGE_STEP, payload: {step: step}});
     };
-
+    
     let status: Status;
     if (winner) {
         status = `Выиграл ${winner}`;

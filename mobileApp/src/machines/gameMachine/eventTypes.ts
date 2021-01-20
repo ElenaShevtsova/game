@@ -7,7 +7,7 @@ export enum GAMES_EVENTS {
 
 export type MakeAMove = {
     type: GAMES_EVENTS.MAKE_A_MOVE;
-    payload: { currentSquare: Squares, xIsNext: XIsNext };
+    payload: {currentSquare: Squares, xIsNext: XIsNext};
 }
 export type ChangeStep = {
     type: GAMES_EVENTS.CHANGE_STEP;

@@ -3,7 +3,7 @@ import {IInitContext} from '../gameMachine';
 import {ChangeStep} from '../eventTypes';
 
 export const changeStep = () => {
-    return assign((context:IInitContext, event: ChangeStep) => {
+    return assign<IInitContext, ChangeStep>((context, event) => {
         const step= event.payload.step;
         return {
             history: context.history.slice(0, step + 1),

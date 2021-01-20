@@ -1,7 +1,7 @@
 import {interpret, Machine} from 'xstate';
 
 import {Disabled, SquaresInHistory, StepNumber, Winner, XIsNext} from '../../types';
-import {GAME_TYPES} from './stateTypes';
+import {GAME_TYPES, GameStates} from './stateTypes';
 import {xTurnState} from './xTurnState';
 import {oTurnState} from './oTurnState';
 import {idleState} from './idleState';
@@ -27,7 +27,7 @@ export const initialContext: IInitContext = {
     disabled: false,
 };
 
-export const gameMachine = Machine<IInitContext, {}, GameEvents>({
+export const gameMachine = Machine<IInitContext, GameStates, GameEvents>({
         id: 'gameMachine',
         initial: GAME_TYPES.IDLE,
         context: initialContext,
