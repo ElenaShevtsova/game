@@ -1,36 +1,39 @@
-import {useSelector} from 'react-redux';
+import { useService } from '@xstate/react';
 
-import {
-  actionMakeAMove,
-  actionChangeDisabled,
-  actionTypes,
-} from '../../redux/actions';
-import {XIsNext, Squares, Index, Status} from '../../types';
-import {
-  historySelector,
-  winnerSelector,
-  xIsNextSelector,
-} from '../../redux/selectors';
-import {GameComponent} from './game';
+import { Index, Squares, Status, Step, XIsNext } from '../../types';
+import { GameComponent } from './game';
+import { service } from '../../machines/gameMachine/gameMachine';
+import { GAMES_EVENTS } from '../../machines/gameMachine/eventTypes';
 
 export const clickOnSquare = (
   i: Index,
   xIsNext: XIsNext,
   currentSquares: Squares,
-): actionTypes => {
+  saveCurrentSquare: (currentSquare: Squares) => void,
+) => {
   const squares = currentSquares.slice();
-  if (squares[i]) {
-    return actionChangeDisabled();
-  } else {
+  if (!squares[i]) {
     squares[i] = xIsNext ? 'X' : 'O';
-    return actionMakeAMove(squares);
+    saveCurrentSquare(squares);
   }
 };
 
 export const Game = () => {
-  const history = useSelector(historySelector);
-  const xIsNext = useSelector(xIsNextSelector);
-  const winner = useSelector(winnerSelector);
+  const [state, send] = useService(service);
+  const history = state.context.history;
+  const xIsNext = state.context.xIsNext;
+  const winner = state.context.winner;
+
+  const saveCurrentSquare = (currentSquare: Squares) => {
+    send({
+      type: GAMES_EVENTS.MAKE_A_MOVE,
+      payload: { currentSquare: currentSquare, xIsNext: !xIsNext },
+    });
+  };
+  const jumpToMove = (step: Step) => {
+    send({ type: GAMES_EVENTS.CHANGE_STEP, payload: { step: step } });
+  };
+
   let status: Status;
   if (winner) {
     status = `Выиграл ${winner}`;
@@ -41,5 +44,6 @@ export const Game = () => {
       status = `Следующий ход: ${xIsNext ? 'X' : 'O'}`;
     }
   }
-  return GameComponent({status});
+
+  return GameComponent({ status, saveCurrentSquare, state, jumpToMove });
 };

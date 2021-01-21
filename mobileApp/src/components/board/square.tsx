@@ -1,24 +1,23 @@
-import {FC} from 'react';
-import {useSelector} from 'react-redux';
+import { FC } from 'react';
 
-import {clickOnSquare} from '../game';
-import {CurrentSquare, Index} from '../../types';
-import {
-  disabledSelector,
-  historySelector,
-  stepNumberSelector,
-  xIsNextSelector,
-} from '../../redux/selectors';
-import {SquareViewComponent} from './SquareView';
+import { clickOnSquare } from '../game';
+import { CurrentSquare, Index, Squares, State } from '../../types';
+import { SquareViewComponent } from './SquareView';
 
-export type SquareProps = {index: Index};
+export type SquareProps = {
+  index: Index;
+  saveCurrentSquare(currentSquare: Squares): void;
+  state: State;
+};
 export const Square: FC<SquareProps> = (prop) => {
-  const {index} = prop;
-  const history = useSelector(historySelector);
-  const xIsNext = useSelector(xIsNextSelector);
-  const stepNumber = useSelector(stepNumberSelector);
-  const disabled = useSelector(disabledSelector);
+  const { index, saveCurrentSquare, state } = prop;
+  const history = state.context.history;
+  const xIsNext = state.context.xIsNext;
+  const stepNumber = state.context.stepNumber;
+  const disabled = state.context.disabled;
   const currentSquare: CurrentSquare = history[stepNumber].squares;
-  const click = clickOnSquare(index, xIsNext, currentSquare);
-  return SquareViewComponent({disabled, click, currentSquare, index});
+  const onClick = () => {
+    clickOnSquare(index, xIsNext, currentSquare, saveCurrentSquare);
+  };
+  return SquareViewComponent({ disabled, currentSquare, index, onClick });
 };

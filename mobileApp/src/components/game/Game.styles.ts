@@ -1,16 +1,11 @@
-import {StyleSheet, ViewStyle} from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { MARGIN_TOP, WIDTH, SIZE, FONTSIZE, PADDING_BOTTOM } from './constants';
 
 interface Style {
   game: ViewStyle;
   gameInfo: ViewStyle;
   styleStatus: ViewStyle;
 }
-
-const SIZE = 30;
-const MARGIN_TOP = 100;
-const WIDTH = 180;
-const FONTSIZE = 13;
-const PADDING_BOTTOM = 15;
 
 export const styles = StyleSheet.create<Style>({
   game: {

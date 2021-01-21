@@ -1,14 +1,17 @@
-import React from 'react';
-import {View} from 'react-native';
+import React, { FC } from 'react';
+import { View } from 'react-native';
 
-import {Square} from './square';
-import {styles} from './Board.styles';
+import { Square } from './square';
+import { styles } from './Board.styles';
+import { Squares, State } from '../../types';
 
-export const Board = () => {
+type BoardComponentProps = { saveCurrentSquare(currentSquare: Squares): void; state: State };
+export const Board: FC<BoardComponentProps> = (props) => {
+  const { saveCurrentSquare, state } = props;
   const squares = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
   ];
 
   return (
@@ -17,7 +20,14 @@ export const Board = () => {
         return (
           <View key={`Row ${row}`}>
             {row.map((i) => {
-              return <Square index={i} key={`Index ${i}`} />;
+              return (
+                <Square
+                  index={i}
+                  key={`Index ${i}`}
+                  saveCurrentSquare={saveCurrentSquare}
+                  state={state}
+                />
+              );
             })}
           </View>
         );

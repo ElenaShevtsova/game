@@ -1,13 +1,11 @@
-import {StyleSheet, ViewStyle} from 'react-native';
-import {BLACK_COLOR, BLUE_COLOR, BORDER_WIDTH} from '../../constants';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { BLACK_COLOR, BLUE_COLOR, BORDER_WIDTH } from '../../constants';
+import { WIDTH, PADDING_VERTICAL, FONTSIZE } from './constants';
+
 interface Style {
   button: ViewStyle;
   textColorBlue: ViewStyle;
 }
-
-const WIDTH = 170;
-const PADDING_VERTICAL = 10;
-const FONTSIZE = 16;
 
 export const styles = StyleSheet.create<Style>({
   button: {

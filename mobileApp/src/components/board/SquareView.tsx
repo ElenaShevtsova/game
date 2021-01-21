@@ -1,24 +1,18 @@
-import {Text, TouchableHighlight} from 'react-native';
-import {styles} from './Square.styles';
-import React, {FC} from 'react';
-import {Disabled, Index, CurrentSquare} from '../../types';
-import {actionTypes} from '../../redux/actions';
-import {useDispatch} from 'react-redux';
+import { Text, TouchableHighlight } from 'react-native';
+import { styles } from './Square.styles';
+import React, { FC } from 'react';
+import { Disabled, Index, CurrentSquare } from '../../types';
 
 export type SquareViewComponentProps = {
   disabled: Disabled;
-  click: actionTypes;
   currentSquare: CurrentSquare;
   index: Index;
+  onClick: any;
 };
 export const SquareViewComponent: FC<SquareViewComponentProps> = (props) => {
-  const {disabled, click, currentSquare, index} = props;
-  const dispatch = useDispatch();
+  const { disabled, currentSquare, index, onClick } = props;
   return (
-    <TouchableHighlight
-      onPress={() => dispatch(click)}
-      disabled={disabled}
-      style={styles.field}>
+    <TouchableHighlight onPress={() => onClick()} disabled={disabled} style={styles.field}>
       <Text style={styles.fontSize}>{currentSquare[index]}</Text>
     </TouchableHighlight>
   );
