@@ -9,5 +9,13 @@ export type Index = number;
 export type Status = string;
 export type CurrentSquare = (string | null)[];
 export type Move = number;
-export type State = { context: { history: SquaresInHistory, xIsNext: XIsNext, winner: Winner, disabled: Disabled, stepNumber: StepNumber } };
+export type State = {
+  context: {
+    history: SquaresInHistory;
+    xIsNext: XIsNext;
+    winner: Winner;
+    disabled: Disabled;
+    stepNumber: StepNumber;
+  };
+};
 export type Square = { squares: (string | null)[] };
